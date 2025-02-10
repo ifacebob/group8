@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xk43%m77p6ir0tw#t$3a(ejz2gc66b^r9!8$k$hto_91$h^4z('
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-xk43%m77p6ir0tw#t$3a(ejz2gc66b^r9!8$k$hto_91$h^4z(')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '']
 
@@ -81,7 +82,8 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
-    'default': dj_database_url.config(        # Replace this value with your local database's connection string.        default='postgresql://postgres:postgres@localhost:5432/mysite',        conn_max_age=600    )}
+    'default': dj_database_url.config(default='postgresql://joy:Education1@localhost:5432/lms',    conn_max_age=600    )}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
